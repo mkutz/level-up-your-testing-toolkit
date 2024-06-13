@@ -7,7 +7,7 @@ dependencies {
   testImplementation(platform("org.junit:junit-bom:$junitVersion"))
   testImplementation("org.junit.jupiter:junit-jupiter")
   testImplementation("org.junit.jupiter:junit-jupiter-params")
-  val assertjVersion = "3.17.1"
+  val assertjVersion = "3.26.0"
   testImplementation("org.assertj:assertj-core:$assertjVersion")
 
   val jqwikVersion = "1.8.5"
