@@ -12,6 +12,8 @@ dependencies {
 
   val jqwikVersion = "1.8.5"
   testImplementation("net.jqwik:jqwik:$jqwikVersion")
+
+  testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 java { toolchain { languageVersion.set(JavaLanguageVersion.of(21)) } }
