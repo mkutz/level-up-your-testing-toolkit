@@ -1,14 +1,11 @@
 package io.github.mkutz.qac.approvaltesting
 
-import com.fasterxml.jackson.databind.DeserializationFeature.*
-import com.fasterxml.jackson.databind.MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS
-import com.fasterxml.jackson.databind.SerializationFeature.WRITE_DATES_AS_TIMESTAMPS
 import com.fasterxml.jackson.databind.json.JsonMapper
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import org.approvaltests.JsonApprovals
 import org.junit.jupiter.api.Test
+import java.time.Instant
+import java.time.LocalDate
 
 class ApprovalTest {
 
@@ -26,6 +23,31 @@ class ApprovalTest {
 
     @Test
     fun approvalTest() {
-        JsonApprovals.verifyJson(jsonMapper.writeValueAsString(Order()))
+        val order = Order(
+            id = "someOrderId",
+            version = 1,
+            items = emptyList(),
+            coupons = emptyList(),
+            orderTimeStamp = Instant.now(),
+            deliveryDate = LocalDate.of(2024, 7, 18),
+            shippingCost = listOf(Cost(5, "EUR")),
+            customer = Customer(
+                id = "someCustomerId",
+                firstName = "someFirstName",
+                lastName = "someLastName"
+            ),
+//            shippingAddress = Address(
+//                id = "someShippingAddressId",
+//                firstName = "Janina",
+//                lastName = "Nemec",
+//                streetName = "Schanzenstr.",
+//                houseNumber = "6-20",
+//                city = "Köln",
+//            ),
+//            billingAddress = Address(
+//                id = "someBillingAddressId",
+//            )
+        )
+        JsonApprovals.verifyJson(jsonMapper.writeValueAsString(order))
     }
 }
