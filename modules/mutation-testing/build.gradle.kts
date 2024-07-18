@@ -7,7 +7,7 @@ plugins {
 repositories { mavenCentral() }
 
 dependencies {
-  val junitVersion = "5.10.2"
+  val junitVersion = "5.9.3"
   testImplementation(platform("org.junit:junit-bom:$junitVersion"))
   testImplementation("org.junit.jupiter:junit-jupiter")
   val assertjVersion = "3.26.0"
@@ -16,7 +16,7 @@ dependencies {
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-java { toolchain { languageVersion.set(JavaLanguageVersion.of(11)) } }
+java { toolchain { languageVersion.set(JavaLanguageVersion.of(21)) } }
 
 tasks.withType<Test> { useJUnitPlatform() }
 
@@ -28,7 +28,7 @@ tasks.jacocoTestReport {
 }
 
 pitest {
-  pitestVersion = "1.6.1"
+  pitestVersion = "1.16.1"
   targetTests = setOf("io.github.mkutz.qac.mutationtesting.*")
   targetClasses = setOf("io.github.mkutz.qac.mutationtesting.*")
   threads = 4
