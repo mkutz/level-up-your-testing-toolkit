@@ -1,9 +1,9 @@
 package io.github.mkutz.qac.mutationtesting;
 
-import org.junit.jupiter.api.Test;
-
 import static io.github.mkutz.qac.mutationtesting.FizzBuzz.fizzbuzz;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import org.junit.jupiter.api.Test;
 
 class FizzBuzzTest {
 
