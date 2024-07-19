@@ -80,7 +80,8 @@ class LongJsonStringAssertionTest {
 
         val result = callRestEndpoint(orderId)
 
-        assertThat(result).isEqualToIgnoringWhitespace("""
+        assertThat(result).isEqualToIgnoringWhitespace(
+            """
 {
   "id": "someOrderId",
   "version": 1,

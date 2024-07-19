@@ -1,4 +1,5 @@
 plugins {
+  java
   idea
   val kotlinPluginVersion = "2.0.0"
   kotlin("jvm") version kotlinPluginVersion
