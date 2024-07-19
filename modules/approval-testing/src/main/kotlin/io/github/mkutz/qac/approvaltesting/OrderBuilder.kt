@@ -6,14 +6,14 @@ import java.time.LocalDateTime
 class OrderBuilder {
     private var id: String? = null
     private var version: Int? = null
-    private var items: List<Item>? = null
-    private var coupons: List<Coupon>? = null
+    private var shopItems: List<ShopItem>? = null
+    private var shopCoupons: List<ShopCoupon> = emptyList()
     private var orderTimeStamp: LocalDateTime? = null
     private var deliveryDate: LocalDate? = null
-    private var shippingCost: List<Price> = emptyList()
-    private var customer: Customer? = null
-    private var shippingAddress: Address? = null
-    private var billingAddress: Address? = null
+    private var shippingCost: List<ShopPrice> = emptyList()
+    private var shopCustomer: ShopCustomer? = null
+    private var shippingShopAddress: ShopAddress? = null
+    private var billingShopAddress: ShopAddress? = null
 
     fun id(id: String): OrderBuilder {
         this.id = id
@@ -25,13 +25,13 @@ class OrderBuilder {
         return this
     }
 
-    fun items(items: List<Item>): OrderBuilder {
-        this.items = items
+    fun items(shopItems: List<ShopItem>): OrderBuilder {
+        this.shopItems = shopItems
         return this
     }
 
-    fun coupons(coupons: List<Coupon>): OrderBuilder {
-        this.coupons = coupons
+    fun coupons(shopCoupons: List<ShopCoupon>): OrderBuilder {
+        this.shopCoupons = shopCoupons
         return this
     }
 
@@ -45,38 +45,38 @@ class OrderBuilder {
         return this
     }
 
-    fun shippingCost(shippingCost: List<Price>): OrderBuilder {
+    fun shippingCost(shippingCost: List<ShopPrice>): OrderBuilder {
         this.shippingCost = shippingCost
         return this
     }
 
-    fun customer(customer: Customer): OrderBuilder {
-        this.customer = customer
+    fun customer(shopCustomer: ShopCustomer): OrderBuilder {
+        this.shopCustomer = shopCustomer
         return this
     }
 
-    fun shippingAddress(shippingAddress: Address): OrderBuilder {
-        this.shippingAddress = shippingAddress
+    fun shippingAddress(shippingShopAddress: ShopAddress): OrderBuilder {
+        this.shippingShopAddress = shippingShopAddress
         return this
     }
 
-    fun billingAddress(billingAddress: Address): OrderBuilder {
-        this.billingAddress = billingAddress
+    fun billingAddress(billingShopAddress: ShopAddress): OrderBuilder {
+        this.billingShopAddress = billingShopAddress
         return this
     }
 
-    fun build(): Order {
-        return Order(
+    fun build(): ShopOrder {
+        return ShopOrder(
             id = id!!,
             version = version!!,
-            items = items!!,
-            coupons = coupons!!,
+            items = shopItems!!,
+            coupons = shopCoupons,
             orderTimeStamp = orderTimeStamp,
             deliveryDate = deliveryDate!!,
             shippingCost = shippingCost,
-            customer = customer!!,
-            shippingAddress = shippingAddress!!,
-            billingAddress = billingAddress!!
+            customer = shopCustomer!!,
+            shippingAddress = shippingShopAddress!!,
+            billingAddress = billingShopAddress!!
         )
     }
 

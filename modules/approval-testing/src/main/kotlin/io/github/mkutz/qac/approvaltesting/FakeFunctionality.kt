@@ -13,10 +13,10 @@ val jsonMapper: JsonMapper = JsonMapper
     .addModule(kotlinModule())
     .build()
 
-val savedOrders = mutableMapOf<String, Order>()
+val savedOrders = mutableMapOf<String, ShopOrder>()
 
-fun anOrderWasProcessed(order: Order) {
-    savedOrders[order.id] = order
+fun anOrderWasProcessed(shopOrder: ShopOrder) {
+    savedOrders[shopOrder.id] = shopOrder
 }
 
 fun callRestEndpoint(orderId: String): String? {
@@ -26,7 +26,7 @@ fun callRestEndpoint(orderId: String): String? {
             LocalTime.of(11, 45)
         ),
         shippingCost = listOf(
-            Price(
+            ShopPrice(
                 value = 500,
                 monetaryUnit = "cent",
                 currency = "EUR"

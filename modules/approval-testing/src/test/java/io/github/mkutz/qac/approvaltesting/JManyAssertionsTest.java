@@ -22,7 +22,7 @@ class JManyAssertionsTest {
     @Test
     void assertionTest() throws JsonProcessingException {
         String orderId = "someOrderId";
-        Order order = anOrder()
+        ShopOrder shopOrder = anOrder()
                 .id(orderId)
                 .version(1)
                 .items(List.of(anItem()
@@ -85,7 +85,7 @@ class JManyAssertionsTest {
                 )
                 .build();
 
-        anOrderWasProcessed(order);
+        anOrderWasProcessed(shopOrder);
 
         JsonNode result = TestUtils.jsonMapper.readTree(callRestEndpoint(orderId));
 

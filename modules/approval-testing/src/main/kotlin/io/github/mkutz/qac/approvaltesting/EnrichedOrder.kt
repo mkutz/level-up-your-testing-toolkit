@@ -3,45 +3,45 @@ package io.github.mkutz.qac.approvaltesting
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-data class Order(
+data class EnrichedOrder(
     val id: String,
     val version: Int,
-    val items: List<Item>,
-    val coupons: List<Coupon>,
-    val orderTimeStamp: LocalDateTime? = null,
+    val items: List<EnrichedItem>,
+    val coupons: List<EnrichedCoupon> = emptyList(),
+    val orderTimeStamp: LocalDateTime,
     val deliveryDate: LocalDate,
-    val shippingCost: List<Price> = emptyList(),
-    val customer: Customer,
-    val shippingAddress: Address,
-    val billingAddress: Address
+    val shippingCost: List<EnrichedPrice>,
+    val customer: EnrichedCustomer,
+    val shippingAddress: EnrichedAddress,
+    val billingAddress: EnrichedAddress
 )
 
-data class Item(
-    val id : String,
-    val name : String,
+data class EnrichedItem(
+    val id: String,
+    val name: String,
     val amount: Int,
-    val price: Price
+    val price: EnrichedPrice
 )
 
-data class Coupon(
-    val id : String,
+data class EnrichedCoupon(
+    val id: String,
     val description: String,
     val reducedRateInPercentage: Int
 )
 
-data class Price(
-    val value : Int,
+data class EnrichedPrice(
+    val value: Int,
     val monetaryUnit: String,
     val currency: String
 )
 
-data class Customer(
+data class EnrichedCustomer(
     val id: String,
     val firstName: String,
     val lastName: String
 )
 
-data class Address(
+data class EnrichedAddress(
     val id: String,
     val firstName: String,
     val lastName: String,

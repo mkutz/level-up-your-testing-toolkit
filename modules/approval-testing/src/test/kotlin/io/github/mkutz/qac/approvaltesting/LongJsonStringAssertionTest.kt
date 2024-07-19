@@ -9,15 +9,15 @@ class LongJsonStringAssertionTest {
     @Test
     fun assertionTest() {
         val orderId = "someOrderId"
-        val order = Order(
+        val shopOrder = ShopOrder(
             id = orderId,
             version = 1,
             items = listOf(
-                Item(
+                ShopItem(
                     id = "someItemId",
                     name = "ATD 3 Conf. Days",
                     amount = 2,
-                    price = Price(
+                    price = ShopPrice(
                         value = 225000,
                         monetaryUnit = "cent",
                         currency = "EUR"
@@ -25,19 +25,19 @@ class LongJsonStringAssertionTest {
                 )
             ),
             coupons = listOf(
-                Coupon(
+                ShopCoupon(
                     id = "someCouponId",
                     description = "Speaker Coupon",
                     reducedRateInPercentage = 100
                 )
             ),
             deliveryDate = LocalDate.of(2024, 11, 22),
-            customer = Customer(
+            customer = ShopCustomer(
                 id = "someCustomerId",
                 firstName = "REWE",
                 lastName = "Digital"
             ),
-            shippingAddress = Address(
+            shippingAddress = ShopAddress(
                 id = "someShippingAddressId",
                 firstName = "Janina",
                 lastName = "Nemec",
@@ -51,7 +51,7 @@ class LongJsonStringAssertionTest {
                 longitude = "7.014472855463499",
                 email = "kontakt@rewe-digital.com"
             ),
-            billingAddress = Address(
+            billingAddress = ShopAddress(
                 id = "someBillingAddressId",
                 firstName = "Micha",
                 lastName = "Kutz",
@@ -66,7 +66,7 @@ class LongJsonStringAssertionTest {
                 email = "info@rewe-group.com",
             )
         )
-        anOrderWasProcessed(order)
+        anOrderWasProcessed(shopOrder)
 
         val result = callRestEndpoint(orderId)
 

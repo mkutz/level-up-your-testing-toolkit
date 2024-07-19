@@ -20,8 +20,8 @@ class CustomerBuilder {
         return this
     }
 
-    fun build(): Customer {
-        return Customer(id!!, firstName!!, lastName!!)
+    fun build(): ShopCustomer {
+        return ShopCustomer(id!!, firstName!!, lastName!!)
     }
 
     companion object {

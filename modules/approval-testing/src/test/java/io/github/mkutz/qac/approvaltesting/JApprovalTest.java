@@ -20,7 +20,7 @@ public class JApprovalTest {
     @Test
     void approvalTest() {
         String orderId = "someOrderId";
-        Order order = anOrder()
+        ShopOrder shopOrder = anOrder()
                 .id(orderId)
                 .version(1)
                 .items(List.of(anItem()
@@ -83,7 +83,7 @@ public class JApprovalTest {
                 )
                 .build();
 
-        anOrderWasProcessed(order);
+        anOrderWasProcessed(shopOrder);
 
         String result = callRestEndpoint(orderId);
 

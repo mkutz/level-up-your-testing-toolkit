@@ -4,7 +4,7 @@ class ItemBuilder {
     private var id: String? = null
     private var name: String? = null
     private var amount: Int? = null
-    private var price: Price? = null
+    private var shopPrice: ShopPrice? = null
 
     fun id(id: String?): ItemBuilder {
         this.id = id
@@ -21,13 +21,13 @@ class ItemBuilder {
         return this
     }
 
-    fun price(price: Price?): ItemBuilder {
-        this.price = price
+    fun price(shopPrice: ShopPrice?): ItemBuilder {
+        this.shopPrice = shopPrice
         return this
     }
 
-    fun build(): Item {
-        return Item(id!!, name!!, amount!!, price!!)
+    fun build(): ShopItem {
+        return ShopItem(id!!, name!!, amount!!, shopPrice!!)
     }
 
     companion object {

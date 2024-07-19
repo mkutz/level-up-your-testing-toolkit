@@ -20,8 +20,8 @@ class PriceBuilder {
         return this
     }
 
-    fun build(): Price {
-        return Price(value!!, monetaryUnit!!, currency!!)
+    fun build(): ShopPrice {
+        return ShopPrice(value!!, monetaryUnit!!, currency!!)
     }
 
     companion object {

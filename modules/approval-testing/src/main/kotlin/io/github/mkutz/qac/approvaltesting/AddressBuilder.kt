@@ -74,8 +74,8 @@ class AddressBuilder {
         return this
     }
 
-    fun build(): Address {
-        return Address(
+    fun build(): ShopAddress {
+        return ShopAddress(
             id = id!!,
             firstName = firstName!!,
             lastName = lastName!!,

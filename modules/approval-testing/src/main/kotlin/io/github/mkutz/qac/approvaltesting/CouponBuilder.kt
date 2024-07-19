@@ -20,8 +20,8 @@ class CouponBuilder {
         return this
     }
 
-    fun build(): Coupon {
-        return Coupon(id!!, description!!, reducedRateInPercentage!!)
+    fun build(): ShopCoupon {
+        return ShopCoupon(id!!, description!!, reducedRateInPercentage!!)
     }
 
     companion object {

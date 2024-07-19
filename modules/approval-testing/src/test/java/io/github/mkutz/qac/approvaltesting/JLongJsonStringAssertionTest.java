@@ -20,7 +20,7 @@ public class JLongJsonStringAssertionTest {
     @Test
     void assertionTest() {
         String orderId = "someOrderId";
-        Order order = anOrder()
+        ShopOrder shopOrder = anOrder()
                 .id(orderId)
                 .version(1)
                 .items(List.of(anItem()
@@ -83,7 +83,7 @@ public class JLongJsonStringAssertionTest {
                 )
                 .build();
 
-        anOrderWasProcessed(order);
+        anOrderWasProcessed(shopOrder);
 
         String result = callRestEndpoint(orderId);
 
