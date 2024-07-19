@@ -10,12 +10,12 @@ class OrderBuilder {
     private var coupons: List<Coupon>? = null
     private var orderTimeStamp: LocalDateTime? = null
     private var deliveryDate: LocalDate? = null
-    private var shippingCost: List<Price>? = null
+    private var shippingCost: List<Price> = emptyList()
     private var customer: Customer? = null
     private var shippingAddress: Address? = null
     private var billingAddress: Address? = null
 
-    fun id(id: String?): OrderBuilder {
+    fun id(id: String): OrderBuilder {
         this.id = id
         return this
     }
@@ -25,58 +25,58 @@ class OrderBuilder {
         return this
     }
 
-    fun items(items: List<Item>?): OrderBuilder {
+    fun items(items: List<Item>): OrderBuilder {
         this.items = items
         return this
     }
 
-    fun coupons(coupons: List<Coupon>?): OrderBuilder {
+    fun coupons(coupons: List<Coupon>): OrderBuilder {
         this.coupons = coupons
         return this
     }
 
-    fun orderTimeStamp(orderTimeStamp: LocalDateTime?): OrderBuilder {
+    fun orderTimeStamp(orderTimeStamp: LocalDateTime): OrderBuilder {
         this.orderTimeStamp = orderTimeStamp
         return this
     }
 
-    fun deliveryDate(deliveryDate: LocalDate?): OrderBuilder {
+    fun deliveryDate(deliveryDate: LocalDate): OrderBuilder {
         this.deliveryDate = deliveryDate
         return this
     }
 
-    fun shippingCost(shippingCost: List<Price>?): OrderBuilder {
+    fun shippingCost(shippingCost: List<Price>): OrderBuilder {
         this.shippingCost = shippingCost
         return this
     }
 
-    fun customer(customer: Customer?): OrderBuilder {
+    fun customer(customer: Customer): OrderBuilder {
         this.customer = customer
         return this
     }
 
-    fun shippingAddress(shippingAddress: Address?): OrderBuilder {
+    fun shippingAddress(shippingAddress: Address): OrderBuilder {
         this.shippingAddress = shippingAddress
         return this
     }
 
-    fun billingAddress(billingAddress: Address?): OrderBuilder {
+    fun billingAddress(billingAddress: Address): OrderBuilder {
         this.billingAddress = billingAddress
         return this
     }
 
     fun build(): Order {
         return Order(
-            id!!,
-            version!!,
-            items!!,
-            coupons!!,
-            orderTimeStamp!!,
-            deliveryDate!!,
-            shippingCost!!,
-            customer!!,
-            shippingAddress!!,
-            billingAddress!!
+            id = id!!,
+            version = version!!,
+            items = items!!,
+            coupons = coupons!!,
+            orderTimeStamp = orderTimeStamp,
+            deliveryDate = deliveryDate!!,
+            shippingCost = shippingCost,
+            customer = customer!!,
+            shippingAddress = shippingAddress!!,
+            billingAddress = billingAddress!!
         )
     }
 

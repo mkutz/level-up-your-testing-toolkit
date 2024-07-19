@@ -8,9 +8,9 @@ data class Order(
     val version: Int,
     val items: List<Item>,
     val coupons: List<Coupon>,
-    val orderTimeStamp: LocalDateTime,
+    val orderTimeStamp: LocalDateTime? = null,
     val deliveryDate: LocalDate,
-    val shippingCost: List<Price>,
+    val shippingCost: List<Price> = emptyList(),
     val customer: Customer,
     val shippingAddress: Address,
     val billingAddress: Address

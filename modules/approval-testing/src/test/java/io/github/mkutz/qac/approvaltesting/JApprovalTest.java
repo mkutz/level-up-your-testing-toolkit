@@ -4,8 +4,6 @@ import org.approvaltests.JsonApprovals;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 
 import static io.github.mkutz.qac.approvaltesting.AddressBuilder.anAddress;
@@ -46,16 +44,7 @@ public class JApprovalTest {
                                 .reducedRateInPercentage(100)
                                 .build()
                 ))
-                .orderTimeStamp(LocalDateTime.of(LocalDate.of(2024, 7, 19), LocalTime.of(11, 45)))
                 .deliveryDate(LocalDate.of(2024, 11, 22))
-                .shippingCost(List.of(
-                                aPrice()
-                                        .value(500)
-                                        .monetaryUnit("cent")
-                                        .currency("EUR")
-                                        .build()
-                        )
-                )
                 .customer(aCustomer()
                         .id("someCustomerId")
                         .firstName("REWE")

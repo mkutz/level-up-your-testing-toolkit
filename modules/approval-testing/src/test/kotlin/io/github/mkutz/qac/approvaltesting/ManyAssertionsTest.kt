@@ -3,8 +3,6 @@ package io.github.mkutz.qac.approvaltesting
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.LocalTime
 
 class ManyAssertionsTest {
 
@@ -33,15 +31,7 @@ class ManyAssertionsTest {
                     reducedRateInPercentage = 100
                 )
             ),
-            orderTimeStamp = LocalDateTime.of(LocalDate.of(2024, 7, 19), LocalTime.of(11, 45)),
             deliveryDate = LocalDate.of(2024, 11, 22),
-            shippingCost = listOf(
-                Price(
-                    value = 500,
-                    monetaryUnit = "cent",
-                    currency = "EUR"
-                )
-            ),
             customer = Customer(
                 id = "someCustomerId",
                 firstName = "REWE",
