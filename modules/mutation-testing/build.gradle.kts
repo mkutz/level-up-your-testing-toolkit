@@ -35,6 +35,8 @@ pitest {
   outputFormats = setOf("XML", "HTML")
   timestampedReports = false
   junit5PluginVersion = "1.0.0"
-  verbose = true
-  verbosity = null
+  verbose = false
+  testStrengthThreshold = 80
 }
+
+tasks.check { dependsOn(tasks.pitest) }
