@@ -1,29 +1,37 @@
 package io.github.mkutz.qac.approvaltesting
 
-import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class Order(
     val id: String,
     val version: Int,
     val items: List<Item>,
     val coupons: List<Coupon>,
-    val orderTimeStamp: Instant,
+    val orderTimeStamp: LocalDateTime,
     val deliveryDate: LocalDate,
-    val shippingCost: List<Cost>,
-    val customer: Customer
+    val shippingCost: List<Price>,
+    val customer: Customer,
+    val shippingAddress: Address,
+    val billingAddress: Address
 )
 
 data class Item(
-    val id : String
+    val id : String,
+    val name : String,
+    val amount: Int,
+    val price: Price
 )
 
 data class Coupon(
-    val id : String
+    val id : String,
+    val description: String,
+    val reducedRateInPercentage: Int
 )
 
-data class Cost(
+data class Price(
     val value : Int,
+    val monetaryUnit: String,
     val currency: String
 )
 
@@ -34,5 +42,16 @@ data class Customer(
 )
 
 data class Address(
-    val id : String
+    val id: String,
+    val firstName: String,
+    val lastName: String,
+    val streetName: String,
+    val houseNumber: String,
+    val city: String,
+    val country: String,
+    val phone: String,
+    val latitude: String,
+    val longitude: String,
+    val eMail: String,
+    val postalCode: String
 )
