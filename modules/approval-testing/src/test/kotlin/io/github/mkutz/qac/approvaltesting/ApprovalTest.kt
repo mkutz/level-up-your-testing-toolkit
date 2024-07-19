@@ -1,8 +1,5 @@
 package io.github.mkutz.qac.approvaltesting
 
-import com.fasterxml.jackson.databind.json.JsonMapper
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.kotlinModule
 import org.approvaltests.JsonApprovals
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -10,14 +7,6 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 
 class ApprovalTest {
-
-    private val jsonMapper = JsonMapper
-        .builder()
-        .addModule(JavaTimeModule())
-        .addModule(kotlinModule())
-        .build()
-
-    private var savedOrder: Order? = null
 
     @Test
     fun approvalTest() {
@@ -54,8 +43,8 @@ class ApprovalTest {
                 )),
             customer = Customer(
                 id = "someCustomerId",
-                firstName = "someFirstName",
-                lastName = "someLastName"
+                firstName = "REWE",
+                lastName = "Digital"
             ),
             shippingAddress = Address(
                 id = "someShippingAddressId",
@@ -69,7 +58,7 @@ class ApprovalTest {
                 phone = "0221 9758420",
                 latitude = "50.96490882194811",
                 longitude = "7.014472855463499",
-                eMail = "kontakt@rewe-digital.com"
+                email = "kontakt@rewe-digital.com"
             ),
             billingAddress = Address(
                 id = "someBillingAddressId",
@@ -83,7 +72,7 @@ class ApprovalTest {
                 phone = "+49 221 1490",
                 latitude = "50.94603935915518",
                 longitude = "6.959302840118697",
-                eMail = "info@rewe-group.com",
+                email = "info@rewe-group.com",
             )
         )
         anOrderWasProcessed(order)
@@ -93,9 +82,4 @@ class ApprovalTest {
         JsonApprovals.verifyJson(result)
     }
 
-    private fun anOrderWasProcessed(order: Order) {
-        savedOrder = order
-    }
-
-    private fun callRestEndpoint(orderId: String): String? = jsonMapper.writeValueAsString(savedOrder)
 }

@@ -52,6 +52,6 @@ data class Address(
     val phone: String,
     val latitude: String,
     val longitude: String,
-    val eMail: String,
+    val email: String,
     val postalCode: String
 )
