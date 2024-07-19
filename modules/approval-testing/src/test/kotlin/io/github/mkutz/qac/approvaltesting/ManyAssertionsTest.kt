@@ -6,7 +6,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
-class AssertionTest {
+class ManyAssertionsTest {
 
     @Test
     fun assertionTest() {
