@@ -7,7 +7,7 @@ plugins {
 repositories { mavenCentral() }
 
 dependencies {
-  val junitVersion = "5.9.3"
+  val junitVersion = "5.10.3"
   testImplementation(platform("org.junit:junit-bom:$junitVersion"))
   testImplementation("org.junit.jupiter:junit-jupiter")
   val assertjVersion = "3.26.0"
