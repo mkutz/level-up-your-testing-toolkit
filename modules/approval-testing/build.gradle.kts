@@ -13,7 +13,7 @@ dependencies {
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:$jacksonVersion")
   implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
-  implementation("com.google.code.gson:gson:2.10.1")
+  implementation("com.google.code.gson:gson:2.11.0")
 
   val junitVersion = "5.10.3"
   testImplementation(platform("org.junit:junit-bom:$junitVersion"))
