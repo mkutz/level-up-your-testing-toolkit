@@ -4,17 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import static io.github.mkutz.qac.approvaltesting.AddressBuilder.anAddress;
-import static io.github.mkutz.qac.approvaltesting.CouponBuilder.aCoupon;
-import static io.github.mkutz.qac.approvaltesting.CustomerBuilder.aCustomer;
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.anOrderWasProcessed;
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEndpoint;
-import static io.github.mkutz.qac.approvaltesting.ItemBuilder.anItem;
-import static io.github.mkutz.qac.approvaltesting.OrderBuilder.anOrder;
-import static io.github.mkutz.qac.approvaltesting.PriceBuilder.aPrice;
+import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.aDefaultOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JManyAssertionsTest {
@@ -22,125 +14,78 @@ class JManyAssertionsTest {
     @Test
     void assertionTest() throws JsonProcessingException {
         String orderId = "someOrderId";
-        ShopOrder shopOrder = anOrder()
-                .id(orderId)
-                .version(1)
-                .items(List.of(anItem()
-                                .id("someItemId")
-                                .name("ATD 3 Conf. Days")
-                                .amount(2)
-                                .price(
-                                        aPrice()
-                                                .value(225000)
-                                                .monetaryUnit("cent")
-                                                .currency("EUR")
-                                                .build()
-                                )
-                                .build()
-                        )
-                )
-                .coupons(List.of(
-                        aCoupon()
-                                .id("someCouponId")
-                                .description("Speaker Coupon")
-                                .reducedRateInPercentage(100)
-                                .build()
-                ))
-                .deliveryDate(LocalDate.of(2024, 11, 22))
-                .customer(aCustomer()
-                        .id("someCustomerId")
-                        .firstName("REWE")
-                        .lastName("Digital")
-                        .build()
-                )
-                .shippingAddress(anAddress()
-                        .id("someShippingAddressId")
-                        .firstName("Janina")
-                        .lastName("Nemec")
-                        .streetName("Schanzenstr.")
-                        .houseNumber("6-20")
-                        .postalCode("51063")
-                        .city("Köln")
-                        .country("Deutschland")
-                        .phone("0221 9758420")
-                        .email("kontakt@rewe-digital.com")
-                        .build()
-                )
-                .billingAddress(anAddress()
-                        .id("someBillingAddressId")
-                        .firstName("Micha")
-                        .lastName("Kutz")
-                        .streetName("Domstr.")
-                        .houseNumber("20")
-                        .postalCode("50668")
-                        .city("Köln")
-                        .country("Deutschland")
-                        .phone("+49 221 1490")
-                        .email("info@rewe-group.com")
-                        .build()
-                )
-                .build();
+        ShopOrder order = aDefaultOrder(orderId);
 
-        anOrderWasProcessed(shopOrder);
+        anOrderWasProcessed(order);
 
         JsonNode result = TestUtils.jsonMapper.readTree(callRestEndpoint(orderId));
 
         assertThat(result.get("id").asText()).isEqualTo("someOrderId");
         assertThat(result.get("version").asText()).isEqualTo("1");
 
-        assertThat(result.get("items").get(0).get("id").asText()).isEqualTo("someItemId");
-        assertThat(result.get("items").get(0).get("name").asText()).isEqualTo("ATD 3 Conf. Days");
-        assertThat(result.get("items").get(0).get("amount").asText()).isEqualTo("2");
-        assertThat(result.get("items").get(0).get("price").get("value").asText()).isEqualTo("225000");
-        assertThat(result.get("items").get(0).get("price").get("monetaryUnit").asText()).isEqualTo("cent");
-        assertThat(result.get("items").get(0).get("price").get("currency").asText()).isEqualTo("EUR");
+        JsonNode item = result.get("items").get(0);
+        assertThat(item.get("id").asText()).isEqualTo("someItemId");
+        assertThat(item.get("name").asText()).isEqualTo("ATD 3 Conf. Days");
+        assertThat(item.get("amount").asText()).isEqualTo("2");
+        String name = "value";
+        assertThat(item.get("price").get(name).asText()).isEqualTo("225000");
+        assertThat(item.get("price").get("monetaryUnit").asText()).isEqualTo("cent");
+        assertThat(item.get("price").get("currency").asText()).isEqualTo("EUR");
 
-        assertThat(result.get("coupons").get(0).get("id").asText()).isEqualTo("someCouponId");
-        assertThat(result.get("coupons").get(0).get("description").asText()).isEqualTo("Speaker Coupon");
-        assertThat(result.get("coupons").get(0).get("reducedRateInPercentage").asText()).isEqualTo("100");
+        JsonNode coupon = result.get("coupons").get(0);
+        assertThat(coupon.get("id").asText()).isEqualTo("someCouponId");
+        assertThat(coupon.get("description").asText()).isEqualTo("Speaker Coupon");
+        assertThat(coupon.get("reducedRateInPercentage").asText()).isEqualTo("100");
 
-        assertThat(result.get("orderTimeStamp").get(0).asInt()).isEqualTo(2024);
-        assertThat(result.get("orderTimeStamp").get(1).asInt()).isEqualTo(7);
-        assertThat(result.get("orderTimeStamp").get(2).asInt()).isEqualTo(19);
-        assertThat(result.get("orderTimeStamp").get(3).asInt()).isEqualTo(11);
-        assertThat(result.get("orderTimeStamp").get(4).asInt()).isEqualTo(45);
+        JsonNode orderTimeStamp = result.get("orderTimeStamp");
+        assertThat(orderTimeStamp.get(0).asInt()).isEqualTo(2024);
+        assertThat(orderTimeStamp.get(1).asInt()).isEqualTo(7);
+        assertThat(orderTimeStamp.get(2).asInt()).isEqualTo(19);
+        assertThat(orderTimeStamp.get(3).asInt()).isEqualTo(11);
+        assertThat(orderTimeStamp.get(4).asInt()).isEqualTo(45);
 
-        assertThat(result.get("deliveryDate").get(0).asInt()).isEqualTo(2024);
-        assertThat(result.get("deliveryDate").get(1).asInt()).isEqualTo(11);
-        assertThat(result.get("deliveryDate").get(2).asInt()).isEqualTo(22);
+        JsonNode deliveryDate = result.get("deliveryDate");
+        assertThat(deliveryDate.get(0).asInt()).isEqualTo(2024);
+        assertThat(deliveryDate.get(1).asInt()).isEqualTo(11);
+        assertThat(deliveryDate.get(2).asInt()).isEqualTo(22);
 
-        assertThat(result.get("shippingCost").get(0).get("value").asText()).isEqualTo("500");
-        assertThat(result.get("shippingCost").get(0).get("monetaryUnit").asText()).isEqualTo("cent");
-        assertThat(result.get("shippingCost").get(0).get("currency").asText()).isEqualTo("EUR");
+        JsonNode shippingCost = result.get("shippingCost").get(0);
+        assertThat(shippingCost.get("value").asText()).isEqualTo("500");
+        assertThat(shippingCost.get("monetaryUnit").asText()).isEqualTo("cent");
+        assertThat(shippingCost.get("currency").asText()).isEqualTo("EUR");
 
-        assertThat(result.get("customer").get("id").asText()).isEqualTo("someCustomerId");
-        assertThat(result.get("customer").get("firstName").asText()).isEqualTo("REWE");
-        assertThat(result.get("customer").get("lastName").asText()).isEqualTo("Digital");
+        JsonNode customer = result.get("customer");
+        assertThat(customer.get("id").asText()).isEqualTo("someCustomerId");
+        assertThat(customer.get("firstName").asText()).isEqualTo("REWE");
+        assertThat(customer.get("lastName").asText()).isEqualTo("Digital");
 
-        assertThat(result.get("shippingAddress").get("id").asText()).isEqualTo("someShippingAddressId");
-        assertThat(result.get("shippingAddress").get("firstName").asText()).isEqualTo("Janina");
-        assertThat(result.get("shippingAddress").get("lastName").asText()).isEqualTo("Nemec");
-        assertThat(result.get("shippingAddress").get("streetName").asText()).isEqualTo("Schanzenstr.");
-        assertThat(result.get("shippingAddress").get("houseNumber").asText()).isEqualTo("6-20");
-        assertThat(result.get("shippingAddress").get("postalCode").asText()).isEqualTo("51063");
-        assertThat(result.get("shippingAddress").get("city").asText()).isEqualTo("Köln");
-        assertThat(result.get("shippingAddress").get("country").asText()).isEqualTo("Deutschland");
-        assertThat(result.get("shippingAddress").get("phone").asText()).isEqualTo("0221 9758420");
-        assertThat(result.get("shippingAddress").get("latitude").asText()).isEqualTo("50.96490882194811");
-        assertThat(result.get("shippingAddress").get("longitude").asText()).isEqualTo("7.014472855463499");
-        assertThat(result.get("shippingAddress").get("email").asText()).isEqualTo("kontakt@rewe-digital.com");
+        JsonNode shippingAddress = result.get("shippingAddress");
+        assertThat(shippingAddress.get("id").asText()).isEqualTo("someShippingAddressId");
+        assertThat(shippingAddress.get("firstName").asText()).isEqualTo("Janina");
+        assertThat(shippingAddress.get("lastName").asText()).isEqualTo("Nemec");
+        assertThat(shippingAddress.get("streetName").asText()).isEqualTo("Schanzenstr.");
+        assertThat(shippingAddress.get("houseNumber").asText()).isEqualTo("6-20");
+        assertThat(shippingAddress.get("postalCode").asText()).isEqualTo("51063");
+        assertThat(shippingAddress.get("city").asText()).isEqualTo("Köln");
+        assertThat(shippingAddress.get("country").asText()).isEqualTo("Deutschland");
+        assertThat(shippingAddress.get("phone").asText()).isEqualTo("0221 9758420");
+        assertThat(shippingAddress.get("latitude").asText()).isEqualTo("50.96490882194811");
+        assertThat(shippingAddress.get("longitude").asText()).isEqualTo("7.014472855463499");
+        assertThat(shippingAddress.get("email").asText()).isEqualTo("kontakt@rewe-digital.com");
 
-        assertThat(result.get("billingAddress").get("id").asText()).isEqualTo("someBillingAddressId");
-        assertThat(result.get("billingAddress").get("firstName").asText()).isEqualTo("Micha");
-        assertThat(result.get("billingAddress").get("lastName").asText()).isEqualTo("Kutz");
-        assertThat(result.get("billingAddress").get("streetName").asText()).isEqualTo("Domstr.");
-        assertThat(result.get("billingAddress").get("houseNumber").asText()).isEqualTo("20");
-        assertThat(result.get("billingAddress").get("postalCode").asText()).isEqualTo("50668");
-        assertThat(result.get("billingAddress").get("city").asText()).isEqualTo("Köln");
-        assertThat(result.get("billingAddress").get("country").asText()).isEqualTo("Deutschland");
-        assertThat(result.get("billingAddress").get("phone").asText()).isEqualTo("+49 221 1490");
-        assertThat(result.get("billingAddress").get("latitude").asText()).isEqualTo("50.94603935915518");
-        assertThat(result.get("billingAddress").get("longitude").asText()).isEqualTo("6.959302840118697");
-        assertThat(result.get("billingAddress").get("email").asText()).isEqualTo("info@rewe-group.com");
+        JsonNode billingAddress = result.get("billingAddress");
+        assertThat(billingAddress.get("id").asText()).isEqualTo("someBillingAddressId");
+        assertThat(billingAddress.get("firstName").asText()).isEqualTo("Micha");
+        assertThat(billingAddress.get("lastName").asText()).isEqualTo("Kutz");
+        assertThat(billingAddress.get("streetName").asText()).isEqualTo("Domstr.");
+        assertThat(billingAddress.get("houseNumber").asText()).isEqualTo("20");
+        assertThat(billingAddress.get("postalCode").asText()).isEqualTo("50668");
+        assertThat(billingAddress.get("city").asText()).isEqualTo("Köln");
+        assertThat(billingAddress.get("country").asText()).isEqualTo("Deutschland");
+        assertThat(billingAddress.get("phone").asText()).isEqualTo("+49 221 1490");
+        assertThat(billingAddress.get("latitude").asText()).isEqualTo("50.94603935915518");
+        assertThat(billingAddress.get("longitude").asText()).isEqualTo("6.959302840118697");
+        assertThat(billingAddress.get("email").asText()).isEqualTo("info@rewe-group.com");
     }
+
 }
