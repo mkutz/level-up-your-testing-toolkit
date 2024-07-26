@@ -1,16 +1,13 @@
 package io.github.mkutz.qac.approvaltesting
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 class OrderBuilder {
     private var id: String? = null
     private var version: Int? = null
     private var shopItems: List<ShopItem>? = null
     private var shopCoupons: List<ShopCoupon> = emptyList()
-    private var orderTimeStamp: LocalDateTime? = null
     private var deliveryDate: LocalDate? = null
-    private var shippingCost: List<ShopPrice> = emptyList()
     private var shopCustomer: ShopCustomer? = null
     private var shippingShopAddress: ShopAddress? = null
     private var billingShopAddress: ShopAddress? = null
@@ -35,18 +32,8 @@ class OrderBuilder {
         return this
     }
 
-    fun orderTimeStamp(orderTimeStamp: LocalDateTime): OrderBuilder {
-        this.orderTimeStamp = orderTimeStamp
-        return this
-    }
-
     fun deliveryDate(deliveryDate: LocalDate): OrderBuilder {
         this.deliveryDate = deliveryDate
-        return this
-    }
-
-    fun shippingCost(shippingCost: List<ShopPrice>): OrderBuilder {
-        this.shippingCost = shippingCost
         return this
     }
 
@@ -71,9 +58,7 @@ class OrderBuilder {
             version = version!!,
             items = shopItems!!,
             coupons = shopCoupons,
-            orderTimeStamp = orderTimeStamp,
             deliveryDate = deliveryDate!!,
-            shippingCost = shippingCost,
             customer = shopCustomer!!,
             shippingAddress = shippingShopAddress!!,
             billingAddress = billingShopAddress!!

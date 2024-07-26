@@ -1,16 +1,13 @@
 package io.github.mkutz.qac.approvaltesting
 
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 data class ShopOrder(
     val id: String,
     val version: Int,
     val items: List<ShopItem>,
     val coupons: List<ShopCoupon> = emptyList(),
-    val orderTimeStamp: LocalDateTime? = null,
     val deliveryDate: LocalDate,
-    val shippingCost: List<ShopPrice> = emptyList(),
     val customer: ShopCustomer,
     val shippingAddress: ShopAddress,
     val billingAddress: ShopAddress
