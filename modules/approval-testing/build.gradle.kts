@@ -25,7 +25,7 @@ dependencies {
   val jqwikVersion = "1.9.0"
   testImplementation("net.jqwik:jqwik:$jqwikVersion")
 
-  testImplementation("com.approvaltests:approvaltests:24.2.0")
+  testImplementation("com.approvaltests:approvaltests:24.3.0")
   testImplementation("org.apache.commons:commons-lang3:3.15.0")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
