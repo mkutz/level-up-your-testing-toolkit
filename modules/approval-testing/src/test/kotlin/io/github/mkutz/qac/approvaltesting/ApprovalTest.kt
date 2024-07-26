@@ -43,13 +43,11 @@ class ApprovalTest {
                 lastName = "Nemec",
                 streetName = "Schanzenstr.",
                 houseNumber = "6-20",
-                postalCode = "51063",
                 city = "Köln",
                 country = "Deutschland",
                 phone = "0221 9758420",
-                latitude = "50.96490882194811",
-                longitude = "7.014472855463499",
-                email = "kontakt@rewe-digital.com"
+                email = "kontakt@rewe-digital.com",
+                postalCode = "51063"
             ),
             billingAddress = ShopAddress(
                 id = "someBillingAddressId",
@@ -57,13 +55,11 @@ class ApprovalTest {
                 lastName = "Kutz",
                 streetName = "Domstr.",
                 houseNumber = "20",
-                postalCode = "50668",
                 city = "Köln",
                 country = "Deutschland",
                 phone = "+49 221 1490",
-                latitude = "50.94603935915518",
-                longitude = "6.959302840118697",
                 email = "info@rewe-group.com",
+                postalCode = "50668",
             )
         )
         anOrderWasProcessed(shopOrder)

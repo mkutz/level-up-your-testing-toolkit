@@ -50,8 +50,6 @@ data class ShopAddress(
     val city: String,
     val country: String,
     val phone: String,
-    val latitude: String,
-    val longitude: String,
     val email: String,
     val postalCode: String
 )

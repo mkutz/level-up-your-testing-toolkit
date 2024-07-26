@@ -10,8 +10,6 @@ class AddressBuilder {
     private var city: String? = null
     private var country: String? = null
     private var phone: String? = null
-    private var latitude: String? = null
-    private var longitude: String? = null
     private var email: String? = null
 
     fun id(id: String?): AddressBuilder {
@@ -59,16 +57,6 @@ class AddressBuilder {
         return this
     }
 
-    fun latitude(latitude: String?): AddressBuilder {
-        this.latitude = latitude
-        return this
-    }
-
-    fun longitude(longitude: String?): AddressBuilder {
-        this.longitude = longitude
-        return this
-    }
-
     fun email(email: String?): AddressBuilder {
         this.email = email
         return this
@@ -84,8 +72,6 @@ class AddressBuilder {
             city = city!!,
             country = country!!,
             phone = phone!!,
-            latitude = latitude!!,
-            longitude = longitude!!,
             email = email!!,
             postalCode = postalCode!!
         )
