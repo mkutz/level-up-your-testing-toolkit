@@ -6,34 +6,26 @@ import org.junit.jupiter.api.Test;
 
 import static io.github.mkutz.qac.approvaltesting.AddressBuilder.anAddress;
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.anOrderWasProcessed;
-import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEndpoint;
+import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEndpointForBillingAddress;
 import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.anyOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AddressAssertionTest {
-
     @Test
     void assertionTest() throws JsonProcessingException {
         String orderId = "someOrderId";
         ShopOrder shopOrder = anyOrder(orderId)
                 .billingAddress(anAddress()
                         .id("someBillingAddressId")
-                        .firstName("Micha")
-                        .lastName("Kutz")
-                        .streetName("Domstr.")
-                        .houseNumber("20")
-                        .postalCode("50668")
-                        .city("Köln")
-                        .country("Deutschland")
-                        .phone("+49 221 1490")
-                        .email("info@rewe-group.com")
-                        .build()
-                )
-                .build();
+                        .firstName("Micha").lastName("Kutz")
+                        .streetName("Domstr.").houseNumber("20")
+                        .postalCode("50668").city("Köln").country("Deutschland")
+                        .phone("+49 221 1490").email("info@rewe-group.com").build()
+                ).build();
 
         anOrderWasProcessed(shopOrder);
 
-        JsonNode result = TestUtils.jsonMapper.readTree(callRestEndpoint(orderId)).get("billingAddress");
+        JsonNode result = TestUtils.jsonMapper.readTree(callRestEndpointForBillingAddress(orderId));
         assertThat(result.get("id").asText()).isEqualTo("someBillingAddressId");
         assertThat(result.get("firstName").asText()).isEqualTo("Micha");
         assertThat(result.get("lastName").asText()).isEqualTo("Kutz");
@@ -47,5 +39,4 @@ class AddressAssertionTest {
         assertThat(result.get("longitude").asText()).isEqualTo("6.959302840118697");
         assertThat(result.get("email").asText()).isEqualTo("info@rewe-group.com");
     }
-
 }

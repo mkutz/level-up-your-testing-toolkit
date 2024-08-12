@@ -20,3 +20,7 @@ fun callRestEndpoint(orderId: String): String? {
     return jsonMapper.writeValueAsString(savedOrders.remove(orderId)!!)
 }
 
+fun callRestEndpointForBillingAddress(orderId: String): String? {
+    return jsonMapper.writeValueAsString(savedOrders.remove(orderId)!!.billingAddress)
+}
+

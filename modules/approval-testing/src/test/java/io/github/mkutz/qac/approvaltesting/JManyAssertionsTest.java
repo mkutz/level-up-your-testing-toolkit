@@ -27,10 +27,11 @@ class JManyAssertionsTest {
         assertThat(item.get("id").asText()).isEqualTo("someItemId");
         assertThat(item.get("name").asText()).isEqualTo("ATD 3 Conf. Days");
         assertThat(item.get("amount").asText()).isEqualTo("2");
-        String name = "value";
-        assertThat(item.get("price").get(name).asText()).isEqualTo("225000");
-        assertThat(item.get("price").get("monetaryUnit").asText()).isEqualTo("cent");
-        assertThat(item.get("price").get("currency").asText()).isEqualTo("EUR");
+
+        JsonNode itemPrice = item.get("price");
+        assertThat(itemPrice.get("value").asText()).isEqualTo("225000");
+        assertThat(itemPrice.get("monetaryUnit").asText()).isEqualTo("cent");
+        assertThat(itemPrice.get("currency").asText()).isEqualTo("EUR");
 
         JsonNode coupon = result.get("coupons").get(0);
         assertThat(coupon.get("id").asText()).isEqualTo("someCouponId");
