@@ -12,6 +12,5 @@ record Address(
         String latitude,
         String longitude,
         String email,
-        String postalCode
-) {
+        String postalCode) {
 }

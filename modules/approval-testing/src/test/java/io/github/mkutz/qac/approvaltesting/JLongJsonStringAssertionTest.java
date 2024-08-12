@@ -18,7 +18,9 @@ public class JLongJsonStringAssertionTest {
 
         String result = callRestEndpoint(orderId);
 
-        assertThat(result).isEqualToIgnoringWhitespace("""        
+        assertThat(result)
+                .isEqualToIgnoringWhitespace(
+                        """
                 {
                   "id": "someOrderId",
                   "version": 1,
@@ -93,7 +95,6 @@ public class JLongJsonStringAssertionTest {
                     "email": "info@rewe-group.com",
                     "postalCode": "50668"
                   }
-                }"""
-        );
+                                }""");
     }
 }

@@ -9,20 +9,28 @@ import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEn
 import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.anyOrder;
 
 class AddressApprovalTest {
-    @Test
-    void assertionTest() {
-        String orderId = "someOrderId";
-        ShopOrder shopOrder = anyOrder(orderId)
-                .billingAddress(anAddress()
-                        .id("someBillingAddressId")
-                        .firstName("Micha").lastName("Kutz")
-                        .streetName("Domstr.").houseNumber("20")
-                        .postalCode("50668").city("Köln").country("Deutschland")
-                        .phone("+49 221 1490").email("info@rewe-group.com").build()
-                ).build();
+  @Test
+  void assertionTest() {
+    String orderId = "someOrderId";
+    ShopOrder shopOrder =
+            anyOrder(orderId)
+                    .billingAddress(
+                            anAddress()
+                                    .id("someBillingAddressId")
+                                    .firstName("Micha")
+                                    .lastName("Kutz")
+                                    .streetName("Domstr.")
+                                    .houseNumber("20")
+                                    .postalCode("50668")
+                                    .city("Köln")
+                                    .country("Deutschland")
+                                    .phone("+49 221 1490")
+                                    .email("info@rewe-group.com")
+                                    .build())
+                    .build();
 
-        anOrderWasProcessed(shopOrder);
+    anOrderWasProcessed(shopOrder);
 
-        JsonApprovals.verifyJson(callRestEndpointForBillingAddress(orderId));
-    }
+    JsonApprovals.verifyJson(callRestEndpointForBillingAddress(orderId));
+  }
 }

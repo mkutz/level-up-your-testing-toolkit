@@ -88,5 +88,4 @@ class JManyAssertionsTest {
         assertThat(billingAddress.get("longitude").asText()).isEqualTo("6.959302840118697");
         assertThat(billingAddress.get("email").asText()).isEqualTo("info@rewe-group.com");
     }
-
 }

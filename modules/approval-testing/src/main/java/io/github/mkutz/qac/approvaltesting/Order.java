@@ -14,6 +14,5 @@ record Order(
         List<Price> shippingCost,
         Customer customer,
         Address shippingAddress,
-        Address billingAddress
-) {
+        Address billingAddress) {
 }
