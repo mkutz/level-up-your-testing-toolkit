@@ -5,14 +5,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 record Order(
-        String id,
-        int version,
-        List<Item> items,
-        List<Coupon> coupons,
-        LocalDateTime orderTimeStamp,
-        LocalDate deliveryDate,
-        List<Price> shippingCost,
-        Customer customer,
-        Address shippingAddress,
-        Address billingAddress) {
-}
+    String id,
+    int version,
+    List<Item> items,
+    List<Coupon> coupons,
+    LocalDateTime orderTimeStamp,
+    LocalDate deliveryDate,
+    List<Price> shippingCost,
+    Customer customer,
+    Address shippingAddress,
+    Address billingAddress) {}

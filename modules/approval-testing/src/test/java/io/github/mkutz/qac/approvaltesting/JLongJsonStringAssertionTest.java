@@ -1,26 +1,26 @@
 package io.github.mkutz.qac.approvaltesting;
 
-import org.junit.jupiter.api.Test;
-
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.anOrderWasProcessed;
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEndpoint;
 import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.aDefaultOrder;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Test;
+
 public class JLongJsonStringAssertionTest {
 
-    @Test
-    void assertionTest() {
-        String orderId = "someOrderId";
-        ShopOrder order = aDefaultOrder(orderId);
+  @Test
+  void assertionTest() {
+    String orderId = "someOrderId";
+    ShopOrder order = aDefaultOrder(orderId);
 
-        anOrderWasProcessed(order);
+    anOrderWasProcessed(order);
 
-        String result = callRestEndpoint(orderId);
+    String result = callRestEndpoint(orderId);
 
-        assertThat(result)
-                .isEqualToIgnoringWhitespace(
-                        """
+    assertThat(result)
+        .isEqualToIgnoringWhitespace(
+            """
                 {
                   "id": "someOrderId",
                   "version": 1,
@@ -96,5 +96,5 @@ public class JLongJsonStringAssertionTest {
                     "postalCode": "50668"
                   }
                                 }""");
-    }
+  }
 }

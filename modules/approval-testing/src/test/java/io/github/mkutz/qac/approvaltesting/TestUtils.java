@@ -5,6 +5,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public final class TestUtils {
 
-    public static JsonMapper jsonMapper =
-            JsonMapper.builder().addModule(new JavaTimeModule()).build();
+  public static JsonMapper jsonMapper =
+      JsonMapper.builder().addModule(new JavaTimeModule()).build();
 }
