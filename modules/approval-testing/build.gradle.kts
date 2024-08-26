@@ -15,7 +15,7 @@ dependencies {
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
   implementation("com.google.code.gson:gson:2.11.0")
 
-  val junitVersion = "5.10.3"
+  val junitVersion = "5.11.0"
   testImplementation(platform("org.junit:junit-bom:$junitVersion"))
   testImplementation("org.junit.jupiter:junit-jupiter")
   testImplementation("org.junit.jupiter:junit-jupiter-params")

@@ -3,7 +3,7 @@ plugins { java }
 repositories { mavenCentral() }
 
 dependencies {
-  val junitVersion = "5.10.3"
+  val junitVersion = "5.11.0"
   testImplementation(platform("org.junit:junit-bom:$junitVersion"))
   testImplementation("org.junit.jupiter:junit-jupiter")
   testImplementation("org.junit.jupiter:junit-jupiter-params")
