@@ -26,7 +26,7 @@ dependencies {
   testImplementation("net.jqwik:jqwik:$jqwikVersion")
 
   testImplementation("com.approvaltests:approvaltests:24.4.0")
-  testImplementation("org.apache.commons:commons-lang3:3.16.0")
+  testImplementation("org.apache.commons:commons-lang3:3.17.0")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
