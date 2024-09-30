@@ -10,7 +10,7 @@ dependencies {
   val assertjVersion = "3.26.3"
   testImplementation("org.assertj:assertj-core:$assertjVersion")
 
-  val jqwikVersion = "1.9.0"
+  val jqwikVersion = "1.9.1"
   testImplementation("net.jqwik:jqwik:$jqwikVersion")
 
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
