@@ -26,17 +26,17 @@ class JManyJsonNodeAssertionsTest {
     JsonNode item = result.get("items").get(0);
     assertThat(item.get("id").asText()).isEqualTo("someItemId");
     assertThat(item.get("name").asText()).isEqualTo("ATD 3 Conf. Days");
-    assertThat(item.get("amount").asText()).isEqualTo("2");
+    assertThat(item.get("amount").asInt()).isEqualTo(2);
 
     JsonNode itemPrice = item.get("price");
-    assertThat(itemPrice.get("value").asText()).isEqualTo("225000");
+    assertThat(itemPrice.get("value").asInt()).isEqualTo(225000);
     assertThat(itemPrice.get("monetaryUnit").asText()).isEqualTo("cent");
     assertThat(itemPrice.get("currency").asText()).isEqualTo("EUR");
 
     JsonNode coupon = result.get("coupons").get(0);
     assertThat(coupon.get("id").asText()).isEqualTo("someCouponId");
     assertThat(coupon.get("description").asText()).isEqualTo("Speaker Coupon");
-    assertThat(coupon.get("reducedRateInPercentage").asText()).isEqualTo("100");
+    assertThat(coupon.get("reducedRateInPercentage").asInt()).isEqualTo(100);
 
     JsonNode orderTimeStamp = result.get("orderTimeStamp");
     assertThat(orderTimeStamp.get(0).asInt()).isEqualTo(2024);
@@ -51,7 +51,7 @@ class JManyJsonNodeAssertionsTest {
     assertThat(deliveryDate.get(2).asInt()).isEqualTo(22);
 
     JsonNode shippingCost = result.get("shippingCost").get(0);
-    assertThat(shippingCost.get("value").asText()).isEqualTo("500");
+    assertThat(shippingCost.get("value").asInt()).isEqualTo(500);
     assertThat(shippingCost.get("monetaryUnit").asText()).isEqualTo("cent");
     assertThat(shippingCost.get("currency").asText()).isEqualTo("EUR");
 

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class FileComparisonTest {
 
-  private String TEST_DIR = "src/test/resources/json/FileComparisonTest/";
+  private final String TEST_DIR = "src/test/resources/json/FileComparisonTest/";
 
   @Test
   void assertionTest() throws IOException {
