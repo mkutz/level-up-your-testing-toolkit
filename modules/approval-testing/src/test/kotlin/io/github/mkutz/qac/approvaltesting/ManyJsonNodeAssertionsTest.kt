@@ -1,10 +1,10 @@
 package io.github.mkutz.qac.approvaltesting
 
+import java.time.LocalDate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 
-class ManyAssertionsTest {
+class ManyJsonNodeAssertionsTest {
 
     @Test
     fun assertionTest() {

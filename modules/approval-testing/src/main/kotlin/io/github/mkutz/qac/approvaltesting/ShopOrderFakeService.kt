@@ -4,7 +4,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
-fun ShopAddress.enrich(latitude: String, longitude: String) = EnrichedAddress(
+fun ShopAddress.enrich(latitude: String, longitude: String) = AddressResult(
     id = id,
     firstName = firstName,
     lastName = lastName,
@@ -19,32 +19,32 @@ fun ShopAddress.enrich(latitude: String, longitude: String) = EnrichedAddress(
     postalCode = postalCode
 )
 
-fun ShopCustomer.enrich() = EnrichedCustomer(
+fun ShopCustomer.enrich() = CustomerResult(
     id = id,
     firstName = firstName,
     lastName = lastName,
 )
 
-fun ShopPrice.enrich() = EnrichedPrice(
+fun ShopPrice.enrich() = PriceResult(
     value = value,
     monetaryUnit = monetaryUnit,
     currency = currency
 )
 
-fun ShopItem.enrich() = EnrichedItem(
+fun ShopItem.enrich() = ItemResult(
     id = id,
     name = name,
     amount = amount,
     price = price.enrich(),
 )
 
-fun ShopCoupon.enrich() = EnrichedCoupon(
+fun ShopCoupon.enrich() = CouponResult(
     id = id,
     description = description,
     reducedRateInPercentage = reducedRateInPercentage
 )
 
-fun ShopOrder.enrich() = EnrichedOrder(
+fun ShopOrder.enrich() = OrderResult(
     id = id,
     version = version,
     items = items.map { it.enrich() },
@@ -55,7 +55,7 @@ fun ShopOrder.enrich() = EnrichedOrder(
     ),
     deliveryDate = deliveryDate,
     shippingCost = listOf(
-        EnrichedPrice(
+        PriceResult(
             value = 500,
             monetaryUnit = "cent",
             currency = "EUR"
