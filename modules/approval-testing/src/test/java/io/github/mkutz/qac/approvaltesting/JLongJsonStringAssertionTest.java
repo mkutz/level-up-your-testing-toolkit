@@ -1,11 +1,11 @@
 package io.github.mkutz.qac.approvaltesting;
 
+import org.junit.jupiter.api.Test;
+
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.anOrderWasProcessed;
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEndpoint;
 import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.aDefaultOrder;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.jupiter.api.Test;
 
 public class JLongJsonStringAssertionTest {
 

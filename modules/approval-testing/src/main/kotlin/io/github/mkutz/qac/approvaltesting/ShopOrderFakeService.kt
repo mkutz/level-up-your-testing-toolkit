@@ -4,7 +4,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 
-fun ShopAddress.enrich(latitude: String, longitude: String) = AddressResult(
+fun ShopAddress.enrich(latitude: String, longitude: String, status: CustomerStatus) = AddressResult(
     id = id,
     firstName = firstName,
     lastName = lastName,
@@ -16,7 +16,8 @@ fun ShopAddress.enrich(latitude: String, longitude: String) = AddressResult(
     latitude = latitude,
     longitude = longitude,
     email = email,
-    postalCode = postalCode
+    postalCode = postalCode,
+    status = status,
 )
 
 fun ShopCustomer.enrich() = CustomerResult(
@@ -62,6 +63,14 @@ fun ShopOrder.enrich() = OrderResult(
         )
     ),
     customer = customer.enrich(),
-    shippingAddress = shippingAddress.enrich(latitude = "50.96490882194811", longitude = "7.014472855463499"),
-    billingAddress = billingAddress.enrich(latitude = "50.94603935915518", longitude = "6.959302840118697"),
+    shippingAddress = shippingAddress.enrich(
+        latitude = "50.96490882194811",
+        longitude = "7.014472855463499",
+        status = CustomerStatus.KNOWN_CUSTOMER
+    ),
+    billingAddress = billingAddress.enrich(
+        latitude = "50.94603935915518",
+        longitude = "6.959302840118697",
+        status = CustomerStatus.NEW_CUSTOMER
+    ),
 )

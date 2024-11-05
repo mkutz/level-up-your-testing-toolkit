@@ -2,6 +2,7 @@ package io.github.mkutz.qac.approvaltesting
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonValue
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -56,5 +57,18 @@ data class AddressResult @JsonCreator constructor(
     @JsonProperty("latitude") val latitude: String,
     @JsonProperty("longitude") val longitude: String,
     @JsonProperty("email") val email: String,
-    @JsonProperty("postalCode") val postalCode: String
+    @JsonProperty("postalCode") val postalCode: String,
+    @JsonProperty("status") val status: CustomerStatus,
 )
+
+enum class CustomerStatus {
+
+    //    @JsonProperty("new-customer")
+    NEW_CUSTOMER,
+
+    //    @JsonProperty("known-customer")
+    KNOWN_CUSTOMER;
+
+    @JsonValue
+    fun value() = name.lowercase()
+}
