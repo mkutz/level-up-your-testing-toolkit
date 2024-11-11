@@ -62,11 +62,7 @@ data class AddressResult @JsonCreator constructor(
 )
 
 enum class CustomerStatus {
-
-    //    @JsonProperty("new-customer")
     NEW_CUSTOMER,
-
-    //    @JsonProperty("known-customer")
     KNOWN_CUSTOMER;
 
     @JsonValue

@@ -126,7 +126,8 @@ class LongJsonStringAssertionTest {
     "latitude": "50.96490882194811",
     "longitude": "7.014472855463499",
     "email": "kontakt@rewe-digital.com",
-    "postalCode": "51063"
+    "postalCode": "51063",
+    "status":"known_customer"
   },
   "billingAddress": {
     "id": "someBillingAddressId",
@@ -140,7 +141,8 @@ class LongJsonStringAssertionTest {
     "latitude": "50.94603935915518",
     "longitude": "6.959302840118697",
     "email": "info@rewe-group.com",
-    "postalCode": "50668"
+    "postalCode": "50668",
+    "status":"new_customer"
   }
 }            
         """

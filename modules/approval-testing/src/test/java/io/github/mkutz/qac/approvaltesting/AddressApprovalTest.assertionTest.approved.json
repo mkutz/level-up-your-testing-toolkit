@@ -10,5 +10,6 @@
   "latitude": "50.94603935915518",
   "longitude": "6.959302840118697",
   "email": "info@rewe-group.com",
-  "postalCode": "50668"
+  "postalCode": "50668",
+  "status": "new_customer"
 }

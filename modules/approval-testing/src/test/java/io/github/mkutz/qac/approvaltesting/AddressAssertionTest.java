@@ -2,6 +2,7 @@ package io.github.mkutz.qac.approvaltesting;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -9,8 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static io.github.mkutz.qac.approvaltesting.AddressBuilder.anAddress;
-import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.anOrderWasProcessed;
-import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEndpointForBillingAddress;
+import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.*;
 import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.anyOrder;
 import static io.github.mkutz.qac.approvaltesting.TestUtils.jsonMapper;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -84,7 +84,39 @@ class AddressAssertionTest {
   }
 
   @Test
-  void assertionTest3() {
+  void assertionTest3() throws JsonProcessingException {
+    String orderId = "someOrderId";
+    ShopOrder shopOrder = anyOrder(orderId)
+        .billingAddress(anAddress().id("someBillingAddressId")
+            .firstName("Janina").lastName("Nemec")
+            .streetName("Domstr.").houseNumber("20")
+            .postalCode("50668").city("Köln").country("Deutschland")
+            .phone("+49 221 1490").email("info@rewe-group.com").build()
+        ).build();
+
+    anOrderWasProcessed(shopOrder);
+
+    String content = callRestEndpointForBillingAddress(orderId);
+    AddressResult billingAddress = jsonMapper.readValue(content, AddressResult.class);
+    SoftAssertions.assertSoftly(softly -> {
+      softly.assertThat(billingAddress.getId()).isEqualTo("someBillingAddressId");
+      softly.assertThat(billingAddress.getFirstName()).isEqualTo("Janina");
+      softly.assertThat(billingAddress.getLastName()).isEqualTo("Nemec");
+      softly.assertThat(billingAddress.getStreetName()).isEqualTo("Domstr.");
+      softly.assertThat(billingAddress.getHouseNumber()).isEqualTo("20");
+      softly.assertThat(billingAddress.getPostalCode()).isEqualTo("50668");
+      softly.assertThat(billingAddress.getCity()).isEqualTo("Köln");
+      softly.assertThat(billingAddress.getCountry()).isEqualTo("Deutschland");
+      softly.assertThat(billingAddress.getPhone()).isEqualTo("+49 221 1490");
+      softly.assertThat(billingAddress.getLatitude()).isEqualTo("50.94603935915518");
+      softly.assertThat(billingAddress.getLongitude()).isEqualTo("6.959302840118697");
+      softly.assertThat(billingAddress.getStatus()).isEqualTo(CustomerStatus.NEW_CUSTOMER);
+      softly.assertThat(billingAddress.getEmail()).isEqualTo("info@rewe-group.com");
+    });
+  }
+
+  @Test
+  void assertionTest4() {
     String orderId = "someOrderId";
     ShopOrder shopOrder = anyOrder(orderId)
         .billingAddress(anAddress().id("someBillingAddressId")
@@ -117,7 +149,7 @@ class AddressAssertionTest {
   private final String TEST_DIR = "src/test/resources/json/FileComparisonTest/";
 
   @Test
-  void assertionTest4() throws IOException {
+  void assertionTest5() throws IOException {
     String orderId = "someOrderId";
     ShopOrder shopOrder = anyOrder(orderId)
         .billingAddress(anAddress().id("someBillingAddressId")
@@ -128,6 +160,18 @@ class AddressAssertionTest {
         ).build();
 
     anOrderWasProcessed(shopOrder);
+
+    String result = callRestEndpointForBillingAddress(orderId);
+    String expected = new String(Files.readAllBytes(Paths.get(TEST_DIR + "expectedBillingAddress.json")));
+    assertThat(result).isEqualToIgnoringWhitespace(expected);
+  }
+
+  @Test
+  void assertionTest6() throws IOException {
+    String orderId = "someOrderId";
+    String givenShopOrder = new String(Files.readAllBytes(Paths.get(TEST_DIR + "givenShopOrder.json")));
+
+    postRestEndpoint(givenShopOrder);
 
     String result = callRestEndpointForBillingAddress(orderId);
     String expected = new String(Files.readAllBytes(Paths.get(TEST_DIR + "expectedBillingAddress.json")));
