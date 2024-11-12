@@ -43,18 +43,8 @@ public class JLongJsonStringAssertionTest {
                       "reducedRateInPercentage": 100
                     }
                   ],
-                  "orderTimeStamp": [
-                    2024,
-                    7,
-                    19,
-                    11,
-                    45
-                  ],
-                  "deliveryDate": [
-                    2024,
-                    11,
-                    22
-                  ],
+                  "orderTimeStamp":"2024-07-19T11:45:00",
+                  "deliveryDate":"2024-11-22",
                   "shippingCost": [
                     {
                       "value": 500,

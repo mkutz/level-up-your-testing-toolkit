@@ -1,13 +1,13 @@
 package io.github.mkutz.qac.approvaltesting;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import org.junit.jupiter.api.Test;
+
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.anOrderWasProcessed;
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.callRestEndpoint;
 import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.aDefaultOrder;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.junit.jupiter.api.Test;
 
 class JManyJsonNodeAssertionsTest {
 
@@ -39,16 +39,10 @@ class JManyJsonNodeAssertionsTest {
     assertThat(coupon.get("reducedRateInPercentage").asInt()).isEqualTo(100);
 
     JsonNode orderTimeStamp = result.get("orderTimeStamp");
-    assertThat(orderTimeStamp.get(0).asInt()).isEqualTo(2024);
-    assertThat(orderTimeStamp.get(1).asInt()).isEqualTo(7);
-    assertThat(orderTimeStamp.get(2).asInt()).isEqualTo(19);
-    assertThat(orderTimeStamp.get(3).asInt()).isEqualTo(11);
-    assertThat(orderTimeStamp.get(4).asInt()).isEqualTo(45);
+    assertThat(orderTimeStamp.asText()).isEqualTo("2024-07-19T11:45:00");
 
     JsonNode deliveryDate = result.get("deliveryDate");
-    assertThat(deliveryDate.get(0).asInt()).isEqualTo(2024);
-    assertThat(deliveryDate.get(1).asInt()).isEqualTo(11);
-    assertThat(deliveryDate.get(2).asInt()).isEqualTo(22);
+    assertThat(deliveryDate.asText()).isEqualTo("2024-11-22");
 
     JsonNode shippingCost = result.get("shippingCost").get(0);
     assertThat(shippingCost.get("value").asInt()).isEqualTo(500);

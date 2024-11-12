@@ -11,9 +11,9 @@ public final class TestUtils {
 
   public static JsonMapper jsonMapper =
       JsonMapper.builder()
-          .addModule(new JavaTimeModule())
-          .addModule(new Jdk8Module())
           .enable(READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE)
           .enable(ACCEPT_CASE_INSENSITIVE_ENUMS)
+          .addModule(new JavaTimeModule())
+          .addModule(new Jdk8Module())
           .build();
 }

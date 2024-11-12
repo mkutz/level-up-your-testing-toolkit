@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import static io.github.mkutz.qac.approvaltesting.AddressBuilder.anAddress;
+import static io.github.mkutz.qac.approvaltesting.AddressResultBuilder.anAddressResult;
 import static io.github.mkutz.qac.approvaltesting.FakeFunctionalityKt.*;
 import static io.github.mkutz.qac.approvaltesting.TestOrderBuilderKt.anyOrder;
 import static io.github.mkutz.qac.approvaltesting.TestUtils.jsonMapper;
@@ -81,6 +82,32 @@ class AddressAssertionTest {
     assertThat(billingAddress.getLongitude()).isEqualTo("6.959302840118697");
     assertThat(billingAddress.getStatus()).isEqualTo(CustomerStatus.NEW_CUSTOMER);
     assertThat(billingAddress.getEmail()).isEqualTo("info@rewe-group.com");
+  }
+
+  @Test
+  void assertionTest2a() throws JsonProcessingException {
+    String orderId = "someOrderId";
+    ShopOrder shopOrder = anyOrder(orderId)
+        .billingAddress(anAddress().id("someBillingAddressId")
+            .firstName("Janina").lastName("Nemec")
+            .streetName("Domstr.").houseNumber("20")
+            .postalCode("50668").city("Köln").country("Deutschland")
+            .phone("+49 221 1490").email("info@rewe-group.com").build()
+        ).build();
+
+    anOrderWasProcessed(shopOrder);
+
+    AddressResult billingAddress = jsonMapper.readValue(callRestEndpointForBillingAddress(orderId), AddressResult.class);
+    AddressResult expectedBillingAddress = anAddressResult().id("someBillingAddressId")
+        .firstName("Janina").lastName("Nemec")
+        .streetName("Domstr.").houseNumber("20")
+        .postalCode("50668").city("Köln").country("Deutschland")
+        .phone("+49 221 1490").email("info@rewe-group.com")
+        .latitude("50.94603935915518").longitude("6.959302840118697")
+        .status(CustomerStatus.NEW_CUSTOMER)
+        .build();
+
+    assertThat(billingAddress).isEqualTo(expectedBillingAddress);
   }
 
   @Test

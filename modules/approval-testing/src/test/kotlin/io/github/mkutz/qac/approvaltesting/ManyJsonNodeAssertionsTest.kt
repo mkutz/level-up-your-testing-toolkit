@@ -1,8 +1,8 @@
 package io.github.mkutz.qac.approvaltesting
 
-import java.time.LocalDate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import java.time.LocalDate
 
 class ManyJsonNodeAssertionsTest {
 
@@ -80,15 +80,9 @@ class ManyJsonNodeAssertionsTest {
         assertThat(result["coupons"][0]["description"].asText()).isEqualTo("Speaker Coupon")
         assertThat(result["coupons"][0]["reducedRateInPercentage"].asText()).isEqualTo("100")
 
-        assertThat(result["orderTimeStamp"][0].asInt()).isEqualTo(2024)
-        assertThat(result["orderTimeStamp"][1].asInt()).isEqualTo(7)
-        assertThat(result["orderTimeStamp"][2].asInt()).isEqualTo(19)
-        assertThat(result["orderTimeStamp"][3].asInt()).isEqualTo(11)
-        assertThat(result["orderTimeStamp"][4].asInt()).isEqualTo(45)
+        assertThat(result["orderTimeStamp"].asText()).isEqualTo("2024-07-19T11:45:00")
 
-        assertThat(result["deliveryDate"][0].asInt()).isEqualTo(2024)
-        assertThat(result["deliveryDate"][1].asInt()).isEqualTo(11)
-        assertThat(result["deliveryDate"][2].asInt()).isEqualTo(22)
+        assertThat(result["deliveryDate"].asText()).isEqualTo("2024-11-22")
 
         assertThat(result["shippingCost"][0]["value"].asText()).isEqualTo("500")
         assertThat(result["shippingCost"][0]["monetaryUnit"].asText()).isEqualTo("cent")
