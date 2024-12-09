@@ -22,7 +22,7 @@ dependencies {
   val assertjVersion = "3.26.3"
   testImplementation("org.assertj:assertj-core:$assertjVersion")
 
-  val jqwikVersion = "1.9.1"
+  val jqwikVersion = "1.9.2"
   testImplementation("net.jqwik:jqwik:$jqwikVersion")
 
   testImplementation("com.approvaltests:approvaltests:24.9.0")
